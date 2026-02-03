@@ -2362,6 +2362,7 @@ impl<'de> serde::de::Deserialize<'de> for super::Part {
             __thought,
             __thought_signature,
             __video_metadata,
+            __media_resolution,
             Unknown(std::string::String),
         }
         impl<'de> serde::de::Deserialize<'de> for __FieldTag {
@@ -2400,6 +2401,8 @@ impl<'de> serde::de::Deserialize<'de> for super::Part {
                             "thought_signature" => Ok(__FieldTag::__thought_signature),
                             "videoMetadata" => Ok(__FieldTag::__video_metadata),
                             "video_metadata" => Ok(__FieldTag::__video_metadata),
+                            "mediaResolution" => Ok(__FieldTag::__media_resolution),
+                            "media_resolution" => Ok(__FieldTag::__media_resolution),
                             _ => Ok(__FieldTag::Unknown(value.to_string())),
                         }
                     }
@@ -2606,6 +2609,113 @@ impl<'de> serde::de::Deserialize<'de> for super::Part {
                                 crate::model::part::Metadata::VideoMetadata(
                                     map.next_value::<std::option::Option<
                                         std::boxed::Box<crate::model::VideoMetadata>,
+                                    >>()?
+                                    .unwrap_or_default(),
+                                ),
+                            );
+                        }
+                        __FieldTag::__media_resolution => {
+                            if !fields.insert(__FieldTag::__media_resolution) {
+                                return std::result::Result::Err(A::Error::duplicate_field(
+                                    "multiple values for media_resolution",
+                                ));
+                            }
+                            result.media_resolution = map.next_value::<std::option::Option<crate::model::part::MediaResolution>>()?
+                                ;
+                        }
+                        __FieldTag::Unknown(key) => {
+                            let value = map.next_value::<serde_json::Value>()?;
+                            result._unknown_fields.insert(key, value);
+                        }
+                    }
+                }
+                std::result::Result::Ok(result)
+            }
+        }
+        deserializer.deserialize_any(Visitor)
+    }
+}
+
+#[cfg(any(
+    feature = "data-foundry-service",
+    feature = "gen-ai-cache-service",
+    feature = "gen-ai-tuning-service",
+    feature = "llm-utility-service",
+    feature = "prediction-service",
+    feature = "vertex-rag-service",
+))]
+#[doc(hidden)]
+impl<'de> serde::de::Deserialize<'de> for super::part::MediaResolution {
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        #[allow(non_camel_case_types)]
+        #[doc(hidden)]
+        #[derive(PartialEq, Eq, Hash)]
+        enum __FieldTag {
+            __level,
+            Unknown(std::string::String),
+        }
+        impl<'de> serde::de::Deserialize<'de> for __FieldTag {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct Visitor;
+                impl<'de> serde::de::Visitor<'de> for Visitor {
+                    type Value = __FieldTag;
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter) -> std::fmt::Result {
+                        formatter.write_str("a field name for MediaResolution")
+                    }
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        use std::result::Result::Ok;
+                        use std::string::ToString;
+                        match value {
+                            "level" => Ok(__FieldTag::__level),
+                            _ => Ok(__FieldTag::Unknown(value.to_string())),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(Visitor)
+            }
+        }
+        struct Visitor;
+        impl<'de> serde::de::Visitor<'de> for Visitor {
+            type Value = super::part::MediaResolution;
+            fn expecting(&self, formatter: &mut std::fmt::Formatter) -> std::fmt::Result {
+                formatter.write_str("struct MediaResolution")
+            }
+            fn visit_map<A>(self, mut map: A) -> std::result::Result<Self::Value, A::Error>
+            where
+                A: serde::de::MapAccess<'de>,
+            {
+                #[allow(unused_imports)]
+                use serde::de::Error;
+                use std::option::Option::Some;
+                let mut fields = std::collections::HashSet::new();
+                let mut result = Self::Value::new();
+                while let Some(tag) = map.next_key::<__FieldTag>()? {
+                    #[allow(clippy::match_single_binding)]
+                    match tag {
+                        __FieldTag::__level => {
+                            if !fields.insert(__FieldTag::__level) {
+                                return std::result::Result::Err(A::Error::duplicate_field(
+                                    "multiple values for level",
+                                ));
+                            }
+                            if result.value.is_some() {
+                                return std::result::Result::Err(A::Error::duplicate_field(
+                                    "multiple values for `value`, a oneof with full ID .google.cloud.aiplatform.v1.Part.MediaResolution.level, latest field was level",
+                                ));
+                            }
+                            result.value = std::option::Option::Some(
+                                crate::model::part::media_resolution::Value::Level(
+                                    map.next_value::<std::option::Option<
+                                        crate::model::part::media_resolution::Level,
                                     >>()?
                                     .unwrap_or_default(),
                                 ),
@@ -2856,6 +2966,7 @@ impl<'de> serde::de::Deserialize<'de> for super::VideoMetadata {
         enum __FieldTag {
             __start_offset,
             __end_offset,
+            __fps,
             Unknown(std::string::String),
         }
         impl<'de> serde::de::Deserialize<'de> for __FieldTag {
@@ -2880,6 +2991,7 @@ impl<'de> serde::de::Deserialize<'de> for super::VideoMetadata {
                             "start_offset" => Ok(__FieldTag::__start_offset),
                             "endOffset" => Ok(__FieldTag::__end_offset),
                             "end_offset" => Ok(__FieldTag::__end_offset),
+                            "fps" => Ok(__FieldTag::__fps),
                             _ => Ok(__FieldTag::Unknown(value.to_string())),
                         }
                     }
@@ -2922,6 +3034,25 @@ impl<'de> serde::de::Deserialize<'de> for super::VideoMetadata {
                             }
                             result.end_offset =
                                 map.next_value::<std::option::Option<wkt::Duration>>()?;
+                        }
+                        __FieldTag::__fps => {
+                            if !fields.insert(__FieldTag::__fps) {
+                                return std::result::Result::Err(A::Error::duplicate_field(
+                                    "multiple values for fps",
+                                ));
+                            }
+                            struct __With(std::option::Option<f64>);
+                            impl<'de> serde::de::Deserialize<'de> for __With {
+                                fn deserialize<D>(
+                                    deserializer: D,
+                                ) -> std::result::Result<Self, D::Error>
+                                where
+                                    D: serde::de::Deserializer<'de>,
+                                {
+                                    serde_with::As::< std::option::Option<wkt::internal::F64> >::deserialize(deserializer).map(__With)
+                                }
+                            }
+                            result.fps = map.next_value::<__With>()?.0.unwrap_or_default();
                         }
                         __FieldTag::Unknown(key) => {
                             let value = map.next_value::<serde_json::Value>()?;
@@ -3535,7 +3666,10 @@ impl<'de> serde::de::Deserialize<'de> for super::ImageConfig {
         #[doc(hidden)]
         #[derive(PartialEq, Eq, Hash)]
         enum __FieldTag {
+            __image_output_options,
             __aspect_ratio,
+            __person_generation,
+            __image_size,
             Unknown(std::string::String),
         }
         impl<'de> serde::de::Deserialize<'de> for __FieldTag {
@@ -3556,8 +3690,14 @@ impl<'de> serde::de::Deserialize<'de> for super::ImageConfig {
                         use std::result::Result::Ok;
                         use std::string::ToString;
                         match value {
+                            "imageOutputOptions" => Ok(__FieldTag::__image_output_options),
+                            "image_output_options" => Ok(__FieldTag::__image_output_options),
                             "aspectRatio" => Ok(__FieldTag::__aspect_ratio),
                             "aspect_ratio" => Ok(__FieldTag::__aspect_ratio),
+                            "personGeneration" => Ok(__FieldTag::__person_generation),
+                            "person_generation" => Ok(__FieldTag::__person_generation),
+                            "imageSize" => Ok(__FieldTag::__image_size),
+                            "image_size" => Ok(__FieldTag::__image_size),
                             _ => Ok(__FieldTag::Unknown(value.to_string())),
                         }
                     }
@@ -3583,6 +3723,16 @@ impl<'de> serde::de::Deserialize<'de> for super::ImageConfig {
                 while let Some(tag) = map.next_key::<__FieldTag>()? {
                     #[allow(clippy::match_single_binding)]
                     match tag {
+                        __FieldTag::__image_output_options => {
+                            if !fields.insert(__FieldTag::__image_output_options) {
+                                return std::result::Result::Err(A::Error::duplicate_field(
+                                    "multiple values for image_output_options",
+                                ));
+                            }
+                            result.image_output_options = map.next_value::<std::option::Option<
+                                crate::model::image_config::ImageOutputOptions,
+                            >>()?;
+                        }
                         __FieldTag::__aspect_ratio => {
                             if !fields.insert(__FieldTag::__aspect_ratio) {
                                 return std::result::Result::Err(A::Error::duplicate_field(
@@ -3591,6 +3741,129 @@ impl<'de> serde::de::Deserialize<'de> for super::ImageConfig {
                             }
                             result.aspect_ratio =
                                 map.next_value::<std::option::Option<std::string::String>>()?;
+                        }
+                        __FieldTag::__person_generation => {
+                            if !fields.insert(__FieldTag::__person_generation) {
+                                return std::result::Result::Err(A::Error::duplicate_field(
+                                    "multiple values for person_generation",
+                                ));
+                            }
+                            result.person_generation =
+                                map.next_value::<std::option::Option<
+                                    crate::model::image_config::PersonGeneration,
+                                >>()?;
+                        }
+                        __FieldTag::__image_size => {
+                            if !fields.insert(__FieldTag::__image_size) {
+                                return std::result::Result::Err(A::Error::duplicate_field(
+                                    "multiple values for image_size",
+                                ));
+                            }
+                            result.image_size =
+                                map.next_value::<std::option::Option<std::string::String>>()?;
+                        }
+                        __FieldTag::Unknown(key) => {
+                            let value = map.next_value::<serde_json::Value>()?;
+                            result._unknown_fields.insert(key, value);
+                        }
+                    }
+                }
+                std::result::Result::Ok(result)
+            }
+        }
+        deserializer.deserialize_any(Visitor)
+    }
+}
+
+#[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
+#[doc(hidden)]
+impl<'de> serde::de::Deserialize<'de> for super::image_config::ImageOutputOptions {
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        #[allow(non_camel_case_types)]
+        #[doc(hidden)]
+        #[derive(PartialEq, Eq, Hash)]
+        enum __FieldTag {
+            __mime_type,
+            __compression_quality,
+            Unknown(std::string::String),
+        }
+        impl<'de> serde::de::Deserialize<'de> for __FieldTag {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                struct Visitor;
+                impl<'de> serde::de::Visitor<'de> for Visitor {
+                    type Value = __FieldTag;
+                    fn expecting(&self, formatter: &mut std::fmt::Formatter) -> std::fmt::Result {
+                        formatter.write_str("a field name for ImageOutputOptions")
+                    }
+                    fn visit_str<E>(self, value: &str) -> std::result::Result<Self::Value, E>
+                    where
+                        E: serde::de::Error,
+                    {
+                        use std::result::Result::Ok;
+                        use std::string::ToString;
+                        match value {
+                            "mimeType" => Ok(__FieldTag::__mime_type),
+                            "mime_type" => Ok(__FieldTag::__mime_type),
+                            "compressionQuality" => Ok(__FieldTag::__compression_quality),
+                            "compression_quality" => Ok(__FieldTag::__compression_quality),
+                            _ => Ok(__FieldTag::Unknown(value.to_string())),
+                        }
+                    }
+                }
+                deserializer.deserialize_identifier(Visitor)
+            }
+        }
+        struct Visitor;
+        impl<'de> serde::de::Visitor<'de> for Visitor {
+            type Value = super::image_config::ImageOutputOptions;
+            fn expecting(&self, formatter: &mut std::fmt::Formatter) -> std::fmt::Result {
+                formatter.write_str("struct ImageOutputOptions")
+            }
+            fn visit_map<A>(self, mut map: A) -> std::result::Result<Self::Value, A::Error>
+            where
+                A: serde::de::MapAccess<'de>,
+            {
+                #[allow(unused_imports)]
+                use serde::de::Error;
+                use std::option::Option::Some;
+                let mut fields = std::collections::HashSet::new();
+                let mut result = Self::Value::new();
+                while let Some(tag) = map.next_key::<__FieldTag>()? {
+                    #[allow(clippy::match_single_binding)]
+                    match tag {
+                        __FieldTag::__mime_type => {
+                            if !fields.insert(__FieldTag::__mime_type) {
+                                return std::result::Result::Err(A::Error::duplicate_field(
+                                    "multiple values for mime_type",
+                                ));
+                            }
+                            result.mime_type =
+                                map.next_value::<std::option::Option<std::string::String>>()?;
+                        }
+                        __FieldTag::__compression_quality => {
+                            if !fields.insert(__FieldTag::__compression_quality) {
+                                return std::result::Result::Err(A::Error::duplicate_field(
+                                    "multiple values for compression_quality",
+                                ));
+                            }
+                            struct __With(std::option::Option<i32>);
+                            impl<'de> serde::de::Deserialize<'de> for __With {
+                                fn deserialize<D>(
+                                    deserializer: D,
+                                ) -> std::result::Result<Self, D::Error>
+                                where
+                                    D: serde::de::Deserializer<'de>,
+                                {
+                                    serde_with::As::< std::option::Option<wkt::internal::I32> >::deserialize(deserializer).map(__With)
+                                }
+                            }
+                            result.compression_quality = map.next_value::<__With>()?.0;
                         }
                         __FieldTag::Unknown(key) => {
                             let value = map.next_value::<serde_json::Value>()?;
@@ -3631,6 +3904,9 @@ impl<'de> serde::de::Deserialize<'de> for super::GenerationConfig {
             __response_schema,
             __response_json_schema,
             __routing_config,
+            __audio_timestamp,
+            __response_modalities,
+            __media_resolution,
             __speech_config,
             __thinking_config,
             __image_config,
@@ -3681,6 +3957,12 @@ impl<'de> serde::de::Deserialize<'de> for super::GenerationConfig {
                             "response_json_schema" => Ok(__FieldTag::__response_json_schema),
                             "routingConfig" => Ok(__FieldTag::__routing_config),
                             "routing_config" => Ok(__FieldTag::__routing_config),
+                            "audioTimestamp" => Ok(__FieldTag::__audio_timestamp),
+                            "audio_timestamp" => Ok(__FieldTag::__audio_timestamp),
+                            "responseModalities" => Ok(__FieldTag::__response_modalities),
+                            "response_modalities" => Ok(__FieldTag::__response_modalities),
+                            "mediaResolution" => Ok(__FieldTag::__media_resolution),
+                            "media_resolution" => Ok(__FieldTag::__media_resolution),
                             "speechConfig" => Ok(__FieldTag::__speech_config),
                             "speech_config" => Ok(__FieldTag::__speech_config),
                             "thinkingConfig" => Ok(__FieldTag::__thinking_config),
@@ -3937,6 +4219,37 @@ impl<'de> serde::de::Deserialize<'de> for super::GenerationConfig {
                             }
                             result.routing_config = map.next_value::<std::option::Option<
                                 crate::model::generation_config::RoutingConfig,
+                            >>()?;
+                        }
+                        __FieldTag::__audio_timestamp => {
+                            if !fields.insert(__FieldTag::__audio_timestamp) {
+                                return std::result::Result::Err(A::Error::duplicate_field(
+                                    "multiple values for audio_timestamp",
+                                ));
+                            }
+                            result.audio_timestamp =
+                                map.next_value::<std::option::Option<bool>>()?;
+                        }
+                        __FieldTag::__response_modalities => {
+                            if !fields.insert(__FieldTag::__response_modalities) {
+                                return std::result::Result::Err(A::Error::duplicate_field(
+                                    "multiple values for response_modalities",
+                                ));
+                            }
+                            result.response_modalities = map
+                                .next_value::<std::option::Option<
+                                    std::vec::Vec<crate::model::generation_config::Modality>,
+                                >>()?
+                                .unwrap_or_default();
+                        }
+                        __FieldTag::__media_resolution => {
+                            if !fields.insert(__FieldTag::__media_resolution) {
+                                return std::result::Result::Err(A::Error::duplicate_field(
+                                    "multiple values for media_resolution",
+                                ));
+                            }
+                            result.media_resolution = map.next_value::<std::option::Option<
+                                crate::model::generation_config::MediaResolution,
                             >>()?;
                         }
                         __FieldTag::__speech_config => {
@@ -4270,6 +4583,7 @@ impl<'de> serde::de::Deserialize<'de> for super::generation_config::ThinkingConf
         enum __FieldTag {
             __include_thoughts,
             __thinking_budget,
+            __thinking_level,
             Unknown(std::string::String),
         }
         impl<'de> serde::de::Deserialize<'de> for __FieldTag {
@@ -4294,6 +4608,8 @@ impl<'de> serde::de::Deserialize<'de> for super::generation_config::ThinkingConf
                             "include_thoughts" => Ok(__FieldTag::__include_thoughts),
                             "thinkingBudget" => Ok(__FieldTag::__thinking_budget),
                             "thinking_budget" => Ok(__FieldTag::__thinking_budget),
+                            "thinkingLevel" => Ok(__FieldTag::__thinking_level),
+                            "thinking_level" => Ok(__FieldTag::__thinking_level),
                             _ => Ok(__FieldTag::Unknown(value.to_string())),
                         }
                     }
@@ -4346,6 +4662,16 @@ impl<'de> serde::de::Deserialize<'de> for super::generation_config::ThinkingConf
                                 }
                             }
                             result.thinking_budget = map.next_value::<__With>()?.0;
+                        }
+                        __FieldTag::__thinking_level => {
+                            if !fields.insert(__FieldTag::__thinking_level) {
+                                return std::result::Result::Err(A::Error::duplicate_field(
+                                    "multiple values for thinking_level",
+                                ));
+                            }
+                            result.thinking_level = map.next_value::<std::option::Option<
+                                crate::model::generation_config::thinking_config::ThinkingLevel,
+                            >>()?;
                         }
                         __FieldTag::Unknown(key) => {
                             let value = map.next_value::<serde_json::Value>()?;

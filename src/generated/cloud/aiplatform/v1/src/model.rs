@@ -3620,6 +3620,10 @@ pub struct Part {
     /// requests.
     pub thought_signature: ::bytes::Bytes,
 
+    /// per part media resolution.
+    /// Media resolution for the input media.
+    pub media_resolution: std::option::Option<crate::model::part::MediaResolution>,
+
     pub data: std::option::Option<crate::model::part::Data>,
 
     pub metadata: std::option::Option<crate::model::part::Metadata>,
@@ -3661,6 +3665,39 @@ impl Part {
     /// ```
     pub fn set_thought_signature<T: std::convert::Into<::bytes::Bytes>>(mut self, v: T) -> Self {
         self.thought_signature = v.into();
+        self
+    }
+
+    /// Sets the value of [media_resolution][crate::model::Part::media_resolution].
+    ///
+    /// # Example
+    /// ```ignore,no_run
+    /// # use google_cloud_aiplatform_v1::model::Part;
+    /// use google_cloud_aiplatform_v1::model::part::MediaResolution;
+    /// let x = Part::new().set_media_resolution(MediaResolution::default()/* use setters */);
+    /// ```
+    pub fn set_media_resolution<T>(mut self, v: T) -> Self
+    where
+        T: std::convert::Into<crate::model::part::MediaResolution>,
+    {
+        self.media_resolution = std::option::Option::Some(v.into());
+        self
+    }
+
+    /// Sets or clears the value of [media_resolution][crate::model::Part::media_resolution].
+    ///
+    /// # Example
+    /// ```ignore,no_run
+    /// # use google_cloud_aiplatform_v1::model::Part;
+    /// use google_cloud_aiplatform_v1::model::part::MediaResolution;
+    /// let x = Part::new().set_or_clear_media_resolution(Some(MediaResolution::default()/* use setters */));
+    /// let x = Part::new().set_or_clear_media_resolution(None::<MediaResolution>);
+    /// ```
+    pub fn set_or_clear_media_resolution<T>(mut self, v: std::option::Option<T>) -> Self
+    where
+        T: std::convert::Into<crate::model::part::MediaResolution>,
+    {
+        self.media_resolution = v.map(|x| x.into());
         self
     }
 
@@ -4047,6 +4084,374 @@ pub mod part {
     #[allow(unused_imports)]
     use super::*;
 
+    /// per part media resolution.
+    /// Media resolution for the input media.
+    #[cfg(any(
+        feature = "data-foundry-service",
+        feature = "gen-ai-cache-service",
+        feature = "gen-ai-tuning-service",
+        feature = "llm-utility-service",
+        feature = "prediction-service",
+        feature = "vertex-rag-service",
+    ))]
+    #[derive(Clone, Default, PartialEq)]
+    #[non_exhaustive]
+    pub struct MediaResolution {
+        pub value: std::option::Option<crate::model::part::media_resolution::Value>,
+
+        pub(crate) _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
+    }
+
+    #[cfg(any(
+        feature = "data-foundry-service",
+        feature = "gen-ai-cache-service",
+        feature = "gen-ai-tuning-service",
+        feature = "llm-utility-service",
+        feature = "prediction-service",
+        feature = "vertex-rag-service",
+    ))]
+    impl MediaResolution {
+        pub fn new() -> Self {
+            std::default::Default::default()
+        }
+
+        /// Sets the value of [value][crate::model::part::MediaResolution::value].
+        ///
+        /// Note that all the setters affecting `value` are mutually
+        /// exclusive.
+        ///
+        /// # Example
+        /// ```ignore,no_run
+        /// # use google_cloud_aiplatform_v1::model::part::MediaResolution;
+        /// use google_cloud_aiplatform_v1::model::part::media_resolution::Level;
+        /// let x0 = MediaResolution::new().set_value(Some(
+        ///     google_cloud_aiplatform_v1::model::part::media_resolution::Value::Level(Level::MediaResolutionLow)));
+        /// let x1 = MediaResolution::new().set_value(Some(
+        ///     google_cloud_aiplatform_v1::model::part::media_resolution::Value::Level(Level::MediaResolutionMedium)));
+        /// let x2 = MediaResolution::new().set_value(Some(
+        ///     google_cloud_aiplatform_v1::model::part::media_resolution::Value::Level(Level::MediaResolutionHigh)));
+        /// ```
+        pub fn set_value<
+            T: std::convert::Into<std::option::Option<crate::model::part::media_resolution::Value>>,
+        >(
+            mut self,
+            v: T,
+        ) -> Self {
+            self.value = v.into();
+            self
+        }
+
+        /// The value of [value][crate::model::part::MediaResolution::value]
+        /// if it holds a `Level`, `None` if the field is not set or
+        /// holds a different branch.
+        pub fn level(&self) -> std::option::Option<&crate::model::part::media_resolution::Level> {
+            #[allow(unreachable_patterns)]
+            self.value.as_ref().and_then(|v| match v {
+                crate::model::part::media_resolution::Value::Level(v) => {
+                    std::option::Option::Some(v)
+                }
+                _ => std::option::Option::None,
+            })
+        }
+
+        /// Sets the value of [value][crate::model::part::MediaResolution::value]
+        /// to hold a `Level`.
+        ///
+        /// Note that all the setters affecting `value` are
+        /// mutually exclusive.
+        ///
+        /// # Example
+        /// ```ignore,no_run
+        /// # use google_cloud_aiplatform_v1::model::part::MediaResolution;
+        /// use google_cloud_aiplatform_v1::model::part::media_resolution::Level;
+        /// let x0 = MediaResolution::new().set_level(Level::MediaResolutionLow);
+        /// let x1 = MediaResolution::new().set_level(Level::MediaResolutionMedium);
+        /// let x2 = MediaResolution::new().set_level(Level::MediaResolutionHigh);
+        /// assert!(x0.level().is_some());
+        /// assert!(x1.level().is_some());
+        /// assert!(x2.level().is_some());
+        /// ```
+        pub fn set_level<T: std::convert::Into<crate::model::part::media_resolution::Level>>(
+            mut self,
+            v: T,
+        ) -> Self {
+            self.value = std::option::Option::Some(
+                crate::model::part::media_resolution::Value::Level(v.into()),
+            );
+            self
+        }
+    }
+
+    #[cfg(any(
+        feature = "data-foundry-service",
+        feature = "gen-ai-cache-service",
+        feature = "gen-ai-tuning-service",
+        feature = "llm-utility-service",
+        feature = "prediction-service",
+        feature = "vertex-rag-service",
+    ))]
+    impl wkt::message::Message for MediaResolution {
+        fn typename() -> &'static str {
+            "type.googleapis.com/google.cloud.aiplatform.v1.Part.MediaResolution"
+        }
+    }
+
+    /// Defines additional types related to [MediaResolution].
+    #[cfg(any(
+        feature = "data-foundry-service",
+        feature = "gen-ai-cache-service",
+        feature = "gen-ai-tuning-service",
+        feature = "llm-utility-service",
+        feature = "prediction-service",
+        feature = "vertex-rag-service",
+    ))]
+    pub mod media_resolution {
+        #[allow(unused_imports)]
+        use super::*;
+
+        /// The media resolution level.
+        ///
+        /// # Working with unknown values
+        ///
+        /// This enum is defined as `#[non_exhaustive]` because Google Cloud may add
+        /// additional enum variants at any time. Adding new variants is not considered
+        /// a breaking change. Applications should write their code in anticipation of:
+        ///
+        /// - New values appearing in future releases of the client library, **and**
+        /// - New values received dynamically, without application changes.
+        ///
+        /// Please consult the [Working with enums] section in the user guide for some
+        /// guidelines.
+        ///
+        /// [Working with enums]: https://google-cloud-rust.github.io/working_with_enums.html
+        #[cfg(any(
+            feature = "data-foundry-service",
+            feature = "gen-ai-cache-service",
+            feature = "gen-ai-tuning-service",
+            feature = "llm-utility-service",
+            feature = "prediction-service",
+            feature = "vertex-rag-service",
+        ))]
+        #[derive(Clone, Debug, PartialEq)]
+        #[non_exhaustive]
+        pub enum Level {
+            /// Media resolution has not been set.
+            MediaResolutionUnspecified,
+            /// Media resolution set to low.
+            MediaResolutionLow,
+            /// Media resolution set to medium.
+            MediaResolutionMedium,
+            /// Media resolution set to high.
+            MediaResolutionHigh,
+            /// Media resolution set to ultra high. This is for image only.
+            MediaResolutionUltraHigh,
+            /// If set, the enum was initialized with an unknown value.
+            ///
+            /// Applications can examine the value using [Level::value] or
+            /// [Level::name].
+            UnknownValue(level::UnknownValue),
+        }
+
+        #[doc(hidden)]
+        #[cfg(any(
+            feature = "data-foundry-service",
+            feature = "gen-ai-cache-service",
+            feature = "gen-ai-tuning-service",
+            feature = "llm-utility-service",
+            feature = "prediction-service",
+            feature = "vertex-rag-service",
+        ))]
+        pub mod level {
+            #[allow(unused_imports)]
+            use super::*;
+            #[derive(Clone, Debug, PartialEq)]
+            pub struct UnknownValue(pub(crate) wkt::internal::UnknownEnumValue);
+        }
+
+        #[cfg(any(
+            feature = "data-foundry-service",
+            feature = "gen-ai-cache-service",
+            feature = "gen-ai-tuning-service",
+            feature = "llm-utility-service",
+            feature = "prediction-service",
+            feature = "vertex-rag-service",
+        ))]
+        impl Level {
+            /// Gets the enum value.
+            ///
+            /// Returns `None` if the enum contains an unknown value deserialized from
+            /// the string representation of enums.
+            pub fn value(&self) -> std::option::Option<i32> {
+                match self {
+                    Self::MediaResolutionUnspecified => std::option::Option::Some(0),
+                    Self::MediaResolutionLow => std::option::Option::Some(1),
+                    Self::MediaResolutionMedium => std::option::Option::Some(2),
+                    Self::MediaResolutionHigh => std::option::Option::Some(3),
+                    Self::MediaResolutionUltraHigh => std::option::Option::Some(4),
+                    Self::UnknownValue(u) => u.0.value(),
+                }
+            }
+
+            /// Gets the enum value as a string.
+            ///
+            /// Returns `None` if the enum contains an unknown value deserialized from
+            /// the integer representation of enums.
+            pub fn name(&self) -> std::option::Option<&str> {
+                match self {
+                    Self::MediaResolutionUnspecified => {
+                        std::option::Option::Some("MEDIA_RESOLUTION_UNSPECIFIED")
+                    }
+                    Self::MediaResolutionLow => std::option::Option::Some("MEDIA_RESOLUTION_LOW"),
+                    Self::MediaResolutionMedium => {
+                        std::option::Option::Some("MEDIA_RESOLUTION_MEDIUM")
+                    }
+                    Self::MediaResolutionHigh => std::option::Option::Some("MEDIA_RESOLUTION_HIGH"),
+                    Self::MediaResolutionUltraHigh => {
+                        std::option::Option::Some("MEDIA_RESOLUTION_ULTRA_HIGH")
+                    }
+                    Self::UnknownValue(u) => u.0.name(),
+                }
+            }
+        }
+
+        #[cfg(any(
+            feature = "data-foundry-service",
+            feature = "gen-ai-cache-service",
+            feature = "gen-ai-tuning-service",
+            feature = "llm-utility-service",
+            feature = "prediction-service",
+            feature = "vertex-rag-service",
+        ))]
+        impl std::default::Default for Level {
+            fn default() -> Self {
+                use std::convert::From;
+                Self::from(0)
+            }
+        }
+
+        #[cfg(any(
+            feature = "data-foundry-service",
+            feature = "gen-ai-cache-service",
+            feature = "gen-ai-tuning-service",
+            feature = "llm-utility-service",
+            feature = "prediction-service",
+            feature = "vertex-rag-service",
+        ))]
+        impl std::fmt::Display for Level {
+            fn fmt(
+                &self,
+                f: &mut std::fmt::Formatter<'_>,
+            ) -> std::result::Result<(), std::fmt::Error> {
+                wkt::internal::display_enum(f, self.name(), self.value())
+            }
+        }
+
+        #[cfg(any(
+            feature = "data-foundry-service",
+            feature = "gen-ai-cache-service",
+            feature = "gen-ai-tuning-service",
+            feature = "llm-utility-service",
+            feature = "prediction-service",
+            feature = "vertex-rag-service",
+        ))]
+        impl std::convert::From<i32> for Level {
+            fn from(value: i32) -> Self {
+                match value {
+                    0 => Self::MediaResolutionUnspecified,
+                    1 => Self::MediaResolutionLow,
+                    2 => Self::MediaResolutionMedium,
+                    3 => Self::MediaResolutionHigh,
+                    4 => Self::MediaResolutionUltraHigh,
+                    _ => Self::UnknownValue(level::UnknownValue(
+                        wkt::internal::UnknownEnumValue::Integer(value),
+                    )),
+                }
+            }
+        }
+
+        #[cfg(any(
+            feature = "data-foundry-service",
+            feature = "gen-ai-cache-service",
+            feature = "gen-ai-tuning-service",
+            feature = "llm-utility-service",
+            feature = "prediction-service",
+            feature = "vertex-rag-service",
+        ))]
+        impl std::convert::From<&str> for Level {
+            fn from(value: &str) -> Self {
+                use std::string::ToString;
+                match value {
+                    "MEDIA_RESOLUTION_UNSPECIFIED" => Self::MediaResolutionUnspecified,
+                    "MEDIA_RESOLUTION_LOW" => Self::MediaResolutionLow,
+                    "MEDIA_RESOLUTION_MEDIUM" => Self::MediaResolutionMedium,
+                    "MEDIA_RESOLUTION_HIGH" => Self::MediaResolutionHigh,
+                    "MEDIA_RESOLUTION_ULTRA_HIGH" => Self::MediaResolutionUltraHigh,
+                    _ => Self::UnknownValue(level::UnknownValue(
+                        wkt::internal::UnknownEnumValue::String(value.to_string()),
+                    )),
+                }
+            }
+        }
+
+        #[cfg(any(
+            feature = "data-foundry-service",
+            feature = "gen-ai-cache-service",
+            feature = "gen-ai-tuning-service",
+            feature = "llm-utility-service",
+            feature = "prediction-service",
+            feature = "vertex-rag-service",
+        ))]
+        impl serde::ser::Serialize for Level {
+            fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+            where
+                S: serde::Serializer,
+            {
+                match self {
+                    Self::MediaResolutionUnspecified => serializer.serialize_i32(0),
+                    Self::MediaResolutionLow => serializer.serialize_i32(1),
+                    Self::MediaResolutionMedium => serializer.serialize_i32(2),
+                    Self::MediaResolutionHigh => serializer.serialize_i32(3),
+                    Self::MediaResolutionUltraHigh => serializer.serialize_i32(4),
+                    Self::UnknownValue(u) => u.0.serialize(serializer),
+                }
+            }
+        }
+
+        #[cfg(any(
+            feature = "data-foundry-service",
+            feature = "gen-ai-cache-service",
+            feature = "gen-ai-tuning-service",
+            feature = "llm-utility-service",
+            feature = "prediction-service",
+            feature = "vertex-rag-service",
+        ))]
+        impl<'de> serde::de::Deserialize<'de> for Level {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                deserializer.deserialize_any(wkt::internal::EnumVisitor::<Level>::new(
+                    ".google.cloud.aiplatform.v1.Part.MediaResolution.Level",
+                ))
+            }
+        }
+
+        #[cfg(any(
+            feature = "data-foundry-service",
+            feature = "gen-ai-cache-service",
+            feature = "gen-ai-tuning-service",
+            feature = "llm-utility-service",
+            feature = "prediction-service",
+            feature = "vertex-rag-service",
+        ))]
+        #[derive(Clone, Debug, PartialEq)]
+        #[non_exhaustive]
+        pub enum Value {
+            /// The tokenization quality used for given media.
+            Level(crate::model::part::media_resolution::Level),
+        }
+    }
+
     #[cfg(any(
         feature = "data-foundry-service",
         feature = "gen-ai-cache-service",
@@ -4265,6 +4670,10 @@ pub struct VideoMetadata {
     /// Optional. The end offset of the video.
     pub end_offset: std::option::Option<wkt::Duration>,
 
+    /// Optional. The frame rate of the video sent to the model. If not specified,
+    /// the default value is 1.0. The valid range is (0.0, 24.0].
+    pub fps: f64,
+
     pub(crate) _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
 }
 
@@ -4344,6 +4753,18 @@ impl VideoMetadata {
         T: std::convert::Into<wkt::Duration>,
     {
         self.end_offset = v.map(|x| x.into());
+        self
+    }
+
+    /// Sets the value of [fps][crate::model::VideoMetadata::fps].
+    ///
+    /// # Example
+    /// ```ignore,no_run
+    /// # use google_cloud_aiplatform_v1::model::VideoMetadata;
+    /// let x = VideoMetadata::new().set_fps(42.0);
+    /// ```
+    pub fn set_fps<T: std::convert::Into<f64>>(mut self, v: T) -> Self {
+        self.fps = v.into();
         self
     }
 }
@@ -4858,6 +5279,9 @@ impl wkt::message::Message for SpeechConfig {
 #[derive(Clone, Default, PartialEq)]
 #[non_exhaustive]
 pub struct ImageConfig {
+    /// Optional. The image output format for generated images.
+    pub image_output_options: std::option::Option<crate::model::image_config::ImageOutputOptions>,
+
     /// Optional. The desired aspect ratio for the generated images. The following
     /// aspect ratios are supported:
     ///
@@ -4869,6 +5293,13 @@ pub struct ImageConfig {
     /// "21:9"
     pub aspect_ratio: std::option::Option<std::string::String>,
 
+    /// Optional. Controls whether the model can generate people.
+    pub person_generation: std::option::Option<crate::model::image_config::PersonGeneration>,
+
+    /// Optional. Specifies the size of generated images. Supported values are
+    /// `1K`, `2K`, `4K`. If not specified, the model will use default value `1K`.
+    pub image_size: std::option::Option<std::string::String>,
+
     pub(crate) _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
 }
 
@@ -4876,6 +5307,39 @@ pub struct ImageConfig {
 impl ImageConfig {
     pub fn new() -> Self {
         std::default::Default::default()
+    }
+
+    /// Sets the value of [image_output_options][crate::model::ImageConfig::image_output_options].
+    ///
+    /// # Example
+    /// ```ignore,no_run
+    /// # use google_cloud_aiplatform_v1::model::ImageConfig;
+    /// use google_cloud_aiplatform_v1::model::image_config::ImageOutputOptions;
+    /// let x = ImageConfig::new().set_image_output_options(ImageOutputOptions::default()/* use setters */);
+    /// ```
+    pub fn set_image_output_options<T>(mut self, v: T) -> Self
+    where
+        T: std::convert::Into<crate::model::image_config::ImageOutputOptions>,
+    {
+        self.image_output_options = std::option::Option::Some(v.into());
+        self
+    }
+
+    /// Sets or clears the value of [image_output_options][crate::model::ImageConfig::image_output_options].
+    ///
+    /// # Example
+    /// ```ignore,no_run
+    /// # use google_cloud_aiplatform_v1::model::ImageConfig;
+    /// use google_cloud_aiplatform_v1::model::image_config::ImageOutputOptions;
+    /// let x = ImageConfig::new().set_or_clear_image_output_options(Some(ImageOutputOptions::default()/* use setters */));
+    /// let x = ImageConfig::new().set_or_clear_image_output_options(None::<ImageOutputOptions>);
+    /// ```
+    pub fn set_or_clear_image_output_options<T>(mut self, v: std::option::Option<T>) -> Self
+    where
+        T: std::convert::Into<crate::model::image_config::ImageOutputOptions>,
+    {
+        self.image_output_options = v.map(|x| x.into());
+        self
     }
 
     /// Sets the value of [aspect_ratio][crate::model::ImageConfig::aspect_ratio].
@@ -4908,12 +5372,327 @@ impl ImageConfig {
         self.aspect_ratio = v.map(|x| x.into());
         self
     }
+
+    /// Sets the value of [person_generation][crate::model::ImageConfig::person_generation].
+    ///
+    /// # Example
+    /// ```ignore,no_run
+    /// # use google_cloud_aiplatform_v1::model::ImageConfig;
+    /// use google_cloud_aiplatform_v1::model::image_config::PersonGeneration;
+    /// let x0 = ImageConfig::new().set_person_generation(PersonGeneration::AllowAll);
+    /// let x1 = ImageConfig::new().set_person_generation(PersonGeneration::AllowAdult);
+    /// let x2 = ImageConfig::new().set_person_generation(PersonGeneration::AllowNone);
+    /// ```
+    pub fn set_person_generation<T>(mut self, v: T) -> Self
+    where
+        T: std::convert::Into<crate::model::image_config::PersonGeneration>,
+    {
+        self.person_generation = std::option::Option::Some(v.into());
+        self
+    }
+
+    /// Sets or clears the value of [person_generation][crate::model::ImageConfig::person_generation].
+    ///
+    /// # Example
+    /// ```ignore,no_run
+    /// # use google_cloud_aiplatform_v1::model::ImageConfig;
+    /// use google_cloud_aiplatform_v1::model::image_config::PersonGeneration;
+    /// let x0 = ImageConfig::new().set_or_clear_person_generation(Some(PersonGeneration::AllowAll));
+    /// let x1 = ImageConfig::new().set_or_clear_person_generation(Some(PersonGeneration::AllowAdult));
+    /// let x2 = ImageConfig::new().set_or_clear_person_generation(Some(PersonGeneration::AllowNone));
+    /// let x_none = ImageConfig::new().set_or_clear_person_generation(None::<PersonGeneration>);
+    /// ```
+    pub fn set_or_clear_person_generation<T>(mut self, v: std::option::Option<T>) -> Self
+    where
+        T: std::convert::Into<crate::model::image_config::PersonGeneration>,
+    {
+        self.person_generation = v.map(|x| x.into());
+        self
+    }
+
+    /// Sets the value of [image_size][crate::model::ImageConfig::image_size].
+    ///
+    /// # Example
+    /// ```ignore,no_run
+    /// # use google_cloud_aiplatform_v1::model::ImageConfig;
+    /// let x = ImageConfig::new().set_image_size("example");
+    /// ```
+    pub fn set_image_size<T>(mut self, v: T) -> Self
+    where
+        T: std::convert::Into<std::string::String>,
+    {
+        self.image_size = std::option::Option::Some(v.into());
+        self
+    }
+
+    /// Sets or clears the value of [image_size][crate::model::ImageConfig::image_size].
+    ///
+    /// # Example
+    /// ```ignore,no_run
+    /// # use google_cloud_aiplatform_v1::model::ImageConfig;
+    /// let x = ImageConfig::new().set_or_clear_image_size(Some("example"));
+    /// let x = ImageConfig::new().set_or_clear_image_size(None::<String>);
+    /// ```
+    pub fn set_or_clear_image_size<T>(mut self, v: std::option::Option<T>) -> Self
+    where
+        T: std::convert::Into<std::string::String>,
+    {
+        self.image_size = v.map(|x| x.into());
+        self
+    }
 }
 
 #[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
 impl wkt::message::Message for ImageConfig {
     fn typename() -> &'static str {
         "type.googleapis.com/google.cloud.aiplatform.v1.ImageConfig"
+    }
+}
+
+/// Defines additional types related to [ImageConfig].
+#[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
+pub mod image_config {
+    #[allow(unused_imports)]
+    use super::*;
+
+    /// The image output format for generated images.
+    #[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
+    #[derive(Clone, Default, PartialEq)]
+    #[non_exhaustive]
+    pub struct ImageOutputOptions {
+        /// Optional. The image format that the output should be saved as.
+        pub mime_type: std::option::Option<std::string::String>,
+
+        /// Optional. The compression quality of the output image.
+        pub compression_quality: std::option::Option<i32>,
+
+        pub(crate) _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
+    }
+
+    #[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
+    impl ImageOutputOptions {
+        pub fn new() -> Self {
+            std::default::Default::default()
+        }
+
+        /// Sets the value of [mime_type][crate::model::image_config::ImageOutputOptions::mime_type].
+        ///
+        /// # Example
+        /// ```ignore,no_run
+        /// # use google_cloud_aiplatform_v1::model::image_config::ImageOutputOptions;
+        /// let x = ImageOutputOptions::new().set_mime_type("example");
+        /// ```
+        pub fn set_mime_type<T>(mut self, v: T) -> Self
+        where
+            T: std::convert::Into<std::string::String>,
+        {
+            self.mime_type = std::option::Option::Some(v.into());
+            self
+        }
+
+        /// Sets or clears the value of [mime_type][crate::model::image_config::ImageOutputOptions::mime_type].
+        ///
+        /// # Example
+        /// ```ignore,no_run
+        /// # use google_cloud_aiplatform_v1::model::image_config::ImageOutputOptions;
+        /// let x = ImageOutputOptions::new().set_or_clear_mime_type(Some("example"));
+        /// let x = ImageOutputOptions::new().set_or_clear_mime_type(None::<String>);
+        /// ```
+        pub fn set_or_clear_mime_type<T>(mut self, v: std::option::Option<T>) -> Self
+        where
+            T: std::convert::Into<std::string::String>,
+        {
+            self.mime_type = v.map(|x| x.into());
+            self
+        }
+
+        /// Sets the value of [compression_quality][crate::model::image_config::ImageOutputOptions::compression_quality].
+        ///
+        /// # Example
+        /// ```ignore,no_run
+        /// # use google_cloud_aiplatform_v1::model::image_config::ImageOutputOptions;
+        /// let x = ImageOutputOptions::new().set_compression_quality(42);
+        /// ```
+        pub fn set_compression_quality<T>(mut self, v: T) -> Self
+        where
+            T: std::convert::Into<i32>,
+        {
+            self.compression_quality = std::option::Option::Some(v.into());
+            self
+        }
+
+        /// Sets or clears the value of [compression_quality][crate::model::image_config::ImageOutputOptions::compression_quality].
+        ///
+        /// # Example
+        /// ```ignore,no_run
+        /// # use google_cloud_aiplatform_v1::model::image_config::ImageOutputOptions;
+        /// let x = ImageOutputOptions::new().set_or_clear_compression_quality(Some(42));
+        /// let x = ImageOutputOptions::new().set_or_clear_compression_quality(None::<i32>);
+        /// ```
+        pub fn set_or_clear_compression_quality<T>(mut self, v: std::option::Option<T>) -> Self
+        where
+            T: std::convert::Into<i32>,
+        {
+            self.compression_quality = v.map(|x| x.into());
+            self
+        }
+    }
+
+    #[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
+    impl wkt::message::Message for ImageOutputOptions {
+        fn typename() -> &'static str {
+            "type.googleapis.com/google.cloud.aiplatform.v1.ImageConfig.ImageOutputOptions"
+        }
+    }
+
+    /// Enum for controlling the generation of people in images.
+    ///
+    /// # Working with unknown values
+    ///
+    /// This enum is defined as `#[non_exhaustive]` because Google Cloud may add
+    /// additional enum variants at any time. Adding new variants is not considered
+    /// a breaking change. Applications should write their code in anticipation of:
+    ///
+    /// - New values appearing in future releases of the client library, **and**
+    /// - New values received dynamically, without application changes.
+    ///
+    /// Please consult the [Working with enums] section in the user guide for some
+    /// guidelines.
+    ///
+    /// [Working with enums]: https://google-cloud-rust.github.io/working_with_enums.html
+    #[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
+    #[derive(Clone, Debug, PartialEq)]
+    #[non_exhaustive]
+    pub enum PersonGeneration {
+        /// The default behavior is unspecified. The model will decide whether to
+        /// generate images of people.
+        Unspecified,
+        /// Allows the model to generate images of people, including adults and
+        /// children.
+        AllowAll,
+        /// Allows the model to generate images of adults, but not children.
+        AllowAdult,
+        /// Prevents the model from generating images of people.
+        AllowNone,
+        /// If set, the enum was initialized with an unknown value.
+        ///
+        /// Applications can examine the value using [PersonGeneration::value] or
+        /// [PersonGeneration::name].
+        UnknownValue(person_generation::UnknownValue),
+    }
+
+    #[doc(hidden)]
+    #[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
+    pub mod person_generation {
+        #[allow(unused_imports)]
+        use super::*;
+        #[derive(Clone, Debug, PartialEq)]
+        pub struct UnknownValue(pub(crate) wkt::internal::UnknownEnumValue);
+    }
+
+    #[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
+    impl PersonGeneration {
+        /// Gets the enum value.
+        ///
+        /// Returns `None` if the enum contains an unknown value deserialized from
+        /// the string representation of enums.
+        pub fn value(&self) -> std::option::Option<i32> {
+            match self {
+                Self::Unspecified => std::option::Option::Some(0),
+                Self::AllowAll => std::option::Option::Some(1),
+                Self::AllowAdult => std::option::Option::Some(2),
+                Self::AllowNone => std::option::Option::Some(3),
+                Self::UnknownValue(u) => u.0.value(),
+            }
+        }
+
+        /// Gets the enum value as a string.
+        ///
+        /// Returns `None` if the enum contains an unknown value deserialized from
+        /// the integer representation of enums.
+        pub fn name(&self) -> std::option::Option<&str> {
+            match self {
+                Self::Unspecified => std::option::Option::Some("PERSON_GENERATION_UNSPECIFIED"),
+                Self::AllowAll => std::option::Option::Some("ALLOW_ALL"),
+                Self::AllowAdult => std::option::Option::Some("ALLOW_ADULT"),
+                Self::AllowNone => std::option::Option::Some("ALLOW_NONE"),
+                Self::UnknownValue(u) => u.0.name(),
+            }
+        }
+    }
+
+    #[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
+    impl std::default::Default for PersonGeneration {
+        fn default() -> Self {
+            use std::convert::From;
+            Self::from(0)
+        }
+    }
+
+    #[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
+    impl std::fmt::Display for PersonGeneration {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
+            wkt::internal::display_enum(f, self.name(), self.value())
+        }
+    }
+
+    #[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
+    impl std::convert::From<i32> for PersonGeneration {
+        fn from(value: i32) -> Self {
+            match value {
+                0 => Self::Unspecified,
+                1 => Self::AllowAll,
+                2 => Self::AllowAdult,
+                3 => Self::AllowNone,
+                _ => Self::UnknownValue(person_generation::UnknownValue(
+                    wkt::internal::UnknownEnumValue::Integer(value),
+                )),
+            }
+        }
+    }
+
+    #[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
+    impl std::convert::From<&str> for PersonGeneration {
+        fn from(value: &str) -> Self {
+            use std::string::ToString;
+            match value {
+                "PERSON_GENERATION_UNSPECIFIED" => Self::Unspecified,
+                "ALLOW_ALL" => Self::AllowAll,
+                "ALLOW_ADULT" => Self::AllowAdult,
+                "ALLOW_NONE" => Self::AllowNone,
+                _ => Self::UnknownValue(person_generation::UnknownValue(
+                    wkt::internal::UnknownEnumValue::String(value.to_string()),
+                )),
+            }
+        }
+    }
+
+    #[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
+    impl serde::ser::Serialize for PersonGeneration {
+        fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+        where
+            S: serde::Serializer,
+        {
+            match self {
+                Self::Unspecified => serializer.serialize_i32(0),
+                Self::AllowAll => serializer.serialize_i32(1),
+                Self::AllowAdult => serializer.serialize_i32(2),
+                Self::AllowNone => serializer.serialize_i32(3),
+                Self::UnknownValue(u) => u.0.serialize(serializer),
+            }
+        }
+    }
+
+    #[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
+    impl<'de> serde::de::Deserialize<'de> for PersonGeneration {
+        fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+        where
+            D: serde::Deserializer<'de>,
+        {
+            deserializer.deserialize_any(wkt::internal::EnumVisitor::<PersonGeneration>::new(
+                ".google.cloud.aiplatform.v1.ImageConfig.PersonGeneration",
+            ))
+        }
     }
 }
 
@@ -5014,6 +5793,25 @@ pub struct GenerationConfig {
 
     /// Optional. Routing configuration.
     pub routing_config: std::option::Option<crate::model::generation_config::RoutingConfig>,
+
+    /// Optional. If enabled, audio timestamps will be included in the request to
+    /// the model. This can be useful for synchronizing audio with other modalities
+    /// in the response.
+    pub audio_timestamp: std::option::Option<bool>,
+
+    /// Optional. The modalities of the response. The model will generate a
+    /// response that includes all the specified modalities. For example, if this
+    /// is set to `[TEXT, IMAGE]`, the response will include both text and an
+    /// image.
+    pub response_modalities: std::vec::Vec<crate::model::generation_config::Modality>,
+
+    /// Optional. The token resolution at which input media content is sampled.
+    /// This is used to control the trade-off between the quality of the response
+    /// and the number of tokens used to represent the media. A higher resolution
+    /// allows the model to perceive more detail, which can lead to a more nuanced
+    /// response, but it will also use more tokens. This does not affect the
+    /// image dimensions sent to the model.
+    pub media_resolution: std::option::Option<crate::model::generation_config::MediaResolution>,
 
     /// Optional. The speech generation config.
     pub speech_config: std::option::Option<crate::model::SpeechConfig>,
@@ -5473,6 +6271,96 @@ impl GenerationConfig {
         T: std::convert::Into<crate::model::generation_config::RoutingConfig>,
     {
         self.routing_config = v.map(|x| x.into());
+        self
+    }
+
+    /// Sets the value of [audio_timestamp][crate::model::GenerationConfig::audio_timestamp].
+    ///
+    /// # Example
+    /// ```ignore,no_run
+    /// # use google_cloud_aiplatform_v1::model::GenerationConfig;
+    /// let x = GenerationConfig::new().set_audio_timestamp(true);
+    /// ```
+    pub fn set_audio_timestamp<T>(mut self, v: T) -> Self
+    where
+        T: std::convert::Into<bool>,
+    {
+        self.audio_timestamp = std::option::Option::Some(v.into());
+        self
+    }
+
+    /// Sets or clears the value of [audio_timestamp][crate::model::GenerationConfig::audio_timestamp].
+    ///
+    /// # Example
+    /// ```ignore,no_run
+    /// # use google_cloud_aiplatform_v1::model::GenerationConfig;
+    /// let x = GenerationConfig::new().set_or_clear_audio_timestamp(Some(false));
+    /// let x = GenerationConfig::new().set_or_clear_audio_timestamp(None::<bool>);
+    /// ```
+    pub fn set_or_clear_audio_timestamp<T>(mut self, v: std::option::Option<T>) -> Self
+    where
+        T: std::convert::Into<bool>,
+    {
+        self.audio_timestamp = v.map(|x| x.into());
+        self
+    }
+
+    /// Sets the value of [response_modalities][crate::model::GenerationConfig::response_modalities].
+    ///
+    /// # Example
+    /// ```ignore,no_run
+    /// # use google_cloud_aiplatform_v1::model::GenerationConfig;
+    /// use google_cloud_aiplatform_v1::model::generation_config::Modality;
+    /// let x = GenerationConfig::new().set_response_modalities([
+    ///     Modality::Text,
+    ///     Modality::Image,
+    ///     Modality::Audio,
+    /// ]);
+    /// ```
+    pub fn set_response_modalities<T, V>(mut self, v: T) -> Self
+    where
+        T: std::iter::IntoIterator<Item = V>,
+        V: std::convert::Into<crate::model::generation_config::Modality>,
+    {
+        use std::iter::Iterator;
+        self.response_modalities = v.into_iter().map(|i| i.into()).collect();
+        self
+    }
+
+    /// Sets the value of [media_resolution][crate::model::GenerationConfig::media_resolution].
+    ///
+    /// # Example
+    /// ```ignore,no_run
+    /// # use google_cloud_aiplatform_v1::model::GenerationConfig;
+    /// use google_cloud_aiplatform_v1::model::generation_config::MediaResolution;
+    /// let x0 = GenerationConfig::new().set_media_resolution(MediaResolution::Low);
+    /// let x1 = GenerationConfig::new().set_media_resolution(MediaResolution::Medium);
+    /// let x2 = GenerationConfig::new().set_media_resolution(MediaResolution::High);
+    /// ```
+    pub fn set_media_resolution<T>(mut self, v: T) -> Self
+    where
+        T: std::convert::Into<crate::model::generation_config::MediaResolution>,
+    {
+        self.media_resolution = std::option::Option::Some(v.into());
+        self
+    }
+
+    /// Sets or clears the value of [media_resolution][crate::model::GenerationConfig::media_resolution].
+    ///
+    /// # Example
+    /// ```ignore,no_run
+    /// # use google_cloud_aiplatform_v1::model::GenerationConfig;
+    /// use google_cloud_aiplatform_v1::model::generation_config::MediaResolution;
+    /// let x0 = GenerationConfig::new().set_or_clear_media_resolution(Some(MediaResolution::Low));
+    /// let x1 = GenerationConfig::new().set_or_clear_media_resolution(Some(MediaResolution::Medium));
+    /// let x2 = GenerationConfig::new().set_or_clear_media_resolution(Some(MediaResolution::High));
+    /// let x_none = GenerationConfig::new().set_or_clear_media_resolution(None::<MediaResolution>);
+    /// ```
+    pub fn set_or_clear_media_resolution<T>(mut self, v: std::option::Option<T>) -> Self
+    where
+        T: std::convert::Into<crate::model::generation_config::MediaResolution>,
+    {
+        self.media_resolution = v.map(|x| x.into());
         self
     }
 
@@ -6049,6 +6937,10 @@ pub mod generation_config {
         /// This is only applied when enable_thinking is true.
         pub thinking_budget: std::option::Option<i32>,
 
+        /// Optional. The number of thoughts tokens that the model should generate.
+        pub thinking_level:
+            std::option::Option<crate::model::generation_config::thinking_config::ThinkingLevel>,
+
         pub(crate) _unknown_fields: serde_json::Map<std::string::String, serde_json::Value>,
     }
 
@@ -6119,12 +7011,510 @@ pub mod generation_config {
             self.thinking_budget = v.map(|x| x.into());
             self
         }
+
+        /// Sets the value of [thinking_level][crate::model::generation_config::ThinkingConfig::thinking_level].
+        ///
+        /// # Example
+        /// ```ignore,no_run
+        /// # use google_cloud_aiplatform_v1::model::generation_config::ThinkingConfig;
+        /// use google_cloud_aiplatform_v1::model::generation_config::thinking_config::ThinkingLevel;
+        /// let x0 = ThinkingConfig::new().set_thinking_level(ThinkingLevel::Low);
+        /// let x1 = ThinkingConfig::new().set_thinking_level(ThinkingLevel::Medium);
+        /// let x2 = ThinkingConfig::new().set_thinking_level(ThinkingLevel::High);
+        /// ```
+        pub fn set_thinking_level<T>(mut self, v: T) -> Self
+        where
+            T: std::convert::Into<crate::model::generation_config::thinking_config::ThinkingLevel>,
+        {
+            self.thinking_level = std::option::Option::Some(v.into());
+            self
+        }
+
+        /// Sets or clears the value of [thinking_level][crate::model::generation_config::ThinkingConfig::thinking_level].
+        ///
+        /// # Example
+        /// ```ignore,no_run
+        /// # use google_cloud_aiplatform_v1::model::generation_config::ThinkingConfig;
+        /// use google_cloud_aiplatform_v1::model::generation_config::thinking_config::ThinkingLevel;
+        /// let x0 = ThinkingConfig::new().set_or_clear_thinking_level(Some(ThinkingLevel::Low));
+        /// let x1 = ThinkingConfig::new().set_or_clear_thinking_level(Some(ThinkingLevel::Medium));
+        /// let x2 = ThinkingConfig::new().set_or_clear_thinking_level(Some(ThinkingLevel::High));
+        /// let x_none = ThinkingConfig::new().set_or_clear_thinking_level(None::<ThinkingLevel>);
+        /// ```
+        pub fn set_or_clear_thinking_level<T>(mut self, v: std::option::Option<T>) -> Self
+        where
+            T: std::convert::Into<crate::model::generation_config::thinking_config::ThinkingLevel>,
+        {
+            self.thinking_level = v.map(|x| x.into());
+            self
+        }
     }
 
     #[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
     impl wkt::message::Message for ThinkingConfig {
         fn typename() -> &'static str {
             "type.googleapis.com/google.cloud.aiplatform.v1.GenerationConfig.ThinkingConfig"
+        }
+    }
+
+    /// Defines additional types related to [ThinkingConfig].
+    #[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
+    pub mod thinking_config {
+        #[allow(unused_imports)]
+        use super::*;
+
+        /// The thinking level for the model.
+        ///
+        /// # Working with unknown values
+        ///
+        /// This enum is defined as `#[non_exhaustive]` because Google Cloud may add
+        /// additional enum variants at any time. Adding new variants is not considered
+        /// a breaking change. Applications should write their code in anticipation of:
+        ///
+        /// - New values appearing in future releases of the client library, **and**
+        /// - New values received dynamically, without application changes.
+        ///
+        /// Please consult the [Working with enums] section in the user guide for some
+        /// guidelines.
+        ///
+        /// [Working with enums]: https://google-cloud-rust.github.io/working_with_enums.html
+        #[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
+        #[derive(Clone, Debug, PartialEq)]
+        #[non_exhaustive]
+        pub enum ThinkingLevel {
+            /// Unspecified thinking level.
+            Unspecified,
+            /// Low thinking level.
+            Low,
+            /// Medium thinking level.
+            Medium,
+            /// High thinking level.
+            High,
+            /// MINIMAL thinking level.
+            Minimal,
+            /// If set, the enum was initialized with an unknown value.
+            ///
+            /// Applications can examine the value using [ThinkingLevel::value] or
+            /// [ThinkingLevel::name].
+            UnknownValue(thinking_level::UnknownValue),
+        }
+
+        #[doc(hidden)]
+        #[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
+        pub mod thinking_level {
+            #[allow(unused_imports)]
+            use super::*;
+            #[derive(Clone, Debug, PartialEq)]
+            pub struct UnknownValue(pub(crate) wkt::internal::UnknownEnumValue);
+        }
+
+        #[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
+        impl ThinkingLevel {
+            /// Gets the enum value.
+            ///
+            /// Returns `None` if the enum contains an unknown value deserialized from
+            /// the string representation of enums.
+            pub fn value(&self) -> std::option::Option<i32> {
+                match self {
+                    Self::Unspecified => std::option::Option::Some(0),
+                    Self::Low => std::option::Option::Some(1),
+                    Self::Medium => std::option::Option::Some(2),
+                    Self::High => std::option::Option::Some(3),
+                    Self::Minimal => std::option::Option::Some(4),
+                    Self::UnknownValue(u) => u.0.value(),
+                }
+            }
+
+            /// Gets the enum value as a string.
+            ///
+            /// Returns `None` if the enum contains an unknown value deserialized from
+            /// the integer representation of enums.
+            pub fn name(&self) -> std::option::Option<&str> {
+                match self {
+                    Self::Unspecified => std::option::Option::Some("THINKING_LEVEL_UNSPECIFIED"),
+                    Self::Low => std::option::Option::Some("LOW"),
+                    Self::Medium => std::option::Option::Some("MEDIUM"),
+                    Self::High => std::option::Option::Some("HIGH"),
+                    Self::Minimal => std::option::Option::Some("MINIMAL"),
+                    Self::UnknownValue(u) => u.0.name(),
+                }
+            }
+        }
+
+        #[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
+        impl std::default::Default for ThinkingLevel {
+            fn default() -> Self {
+                use std::convert::From;
+                Self::from(0)
+            }
+        }
+
+        #[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
+        impl std::fmt::Display for ThinkingLevel {
+            fn fmt(
+                &self,
+                f: &mut std::fmt::Formatter<'_>,
+            ) -> std::result::Result<(), std::fmt::Error> {
+                wkt::internal::display_enum(f, self.name(), self.value())
+            }
+        }
+
+        #[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
+        impl std::convert::From<i32> for ThinkingLevel {
+            fn from(value: i32) -> Self {
+                match value {
+                    0 => Self::Unspecified,
+                    1 => Self::Low,
+                    2 => Self::Medium,
+                    3 => Self::High,
+                    4 => Self::Minimal,
+                    _ => Self::UnknownValue(thinking_level::UnknownValue(
+                        wkt::internal::UnknownEnumValue::Integer(value),
+                    )),
+                }
+            }
+        }
+
+        #[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
+        impl std::convert::From<&str> for ThinkingLevel {
+            fn from(value: &str) -> Self {
+                use std::string::ToString;
+                match value {
+                    "THINKING_LEVEL_UNSPECIFIED" => Self::Unspecified,
+                    "LOW" => Self::Low,
+                    "MEDIUM" => Self::Medium,
+                    "HIGH" => Self::High,
+                    "MINIMAL" => Self::Minimal,
+                    _ => Self::UnknownValue(thinking_level::UnknownValue(
+                        wkt::internal::UnknownEnumValue::String(value.to_string()),
+                    )),
+                }
+            }
+        }
+
+        #[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
+        impl serde::ser::Serialize for ThinkingLevel {
+            fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+            where
+                S: serde::Serializer,
+            {
+                match self {
+                    Self::Unspecified => serializer.serialize_i32(0),
+                    Self::Low => serializer.serialize_i32(1),
+                    Self::Medium => serializer.serialize_i32(2),
+                    Self::High => serializer.serialize_i32(3),
+                    Self::Minimal => serializer.serialize_i32(4),
+                    Self::UnknownValue(u) => u.0.serialize(serializer),
+                }
+            }
+        }
+
+        #[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
+        impl<'de> serde::de::Deserialize<'de> for ThinkingLevel {
+            fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+            where
+                D: serde::Deserializer<'de>,
+            {
+                deserializer.deserialize_any(wkt::internal::EnumVisitor::<ThinkingLevel>::new(
+                    ".google.cloud.aiplatform.v1.GenerationConfig.ThinkingConfig.ThinkingLevel",
+                ))
+            }
+        }
+    }
+
+    /// The modalities of the response.
+    ///
+    /// # Working with unknown values
+    ///
+    /// This enum is defined as `#[non_exhaustive]` because Google Cloud may add
+    /// additional enum variants at any time. Adding new variants is not considered
+    /// a breaking change. Applications should write their code in anticipation of:
+    ///
+    /// - New values appearing in future releases of the client library, **and**
+    /// - New values received dynamically, without application changes.
+    ///
+    /// Please consult the [Working with enums] section in the user guide for some
+    /// guidelines.
+    ///
+    /// [Working with enums]: https://google-cloud-rust.github.io/working_with_enums.html
+    #[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
+    #[derive(Clone, Debug, PartialEq)]
+    #[non_exhaustive]
+    pub enum Modality {
+        /// Unspecified modality. Will be processed as text.
+        Unspecified,
+        /// Text modality.
+        Text,
+        /// Image modality.
+        Image,
+        /// Audio modality.
+        Audio,
+        /// If set, the enum was initialized with an unknown value.
+        ///
+        /// Applications can examine the value using [Modality::value] or
+        /// [Modality::name].
+        UnknownValue(modality::UnknownValue),
+    }
+
+    #[doc(hidden)]
+    #[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
+    pub mod modality {
+        #[allow(unused_imports)]
+        use super::*;
+        #[derive(Clone, Debug, PartialEq)]
+        pub struct UnknownValue(pub(crate) wkt::internal::UnknownEnumValue);
+    }
+
+    #[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
+    impl Modality {
+        /// Gets the enum value.
+        ///
+        /// Returns `None` if the enum contains an unknown value deserialized from
+        /// the string representation of enums.
+        pub fn value(&self) -> std::option::Option<i32> {
+            match self {
+                Self::Unspecified => std::option::Option::Some(0),
+                Self::Text => std::option::Option::Some(1),
+                Self::Image => std::option::Option::Some(2),
+                Self::Audio => std::option::Option::Some(3),
+                Self::UnknownValue(u) => u.0.value(),
+            }
+        }
+
+        /// Gets the enum value as a string.
+        ///
+        /// Returns `None` if the enum contains an unknown value deserialized from
+        /// the integer representation of enums.
+        pub fn name(&self) -> std::option::Option<&str> {
+            match self {
+                Self::Unspecified => std::option::Option::Some("MODALITY_UNSPECIFIED"),
+                Self::Text => std::option::Option::Some("TEXT"),
+                Self::Image => std::option::Option::Some("IMAGE"),
+                Self::Audio => std::option::Option::Some("AUDIO"),
+                Self::UnknownValue(u) => u.0.name(),
+            }
+        }
+    }
+
+    #[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
+    impl std::default::Default for Modality {
+        fn default() -> Self {
+            use std::convert::From;
+            Self::from(0)
+        }
+    }
+
+    #[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
+    impl std::fmt::Display for Modality {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
+            wkt::internal::display_enum(f, self.name(), self.value())
+        }
+    }
+
+    #[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
+    impl std::convert::From<i32> for Modality {
+        fn from(value: i32) -> Self {
+            match value {
+                0 => Self::Unspecified,
+                1 => Self::Text,
+                2 => Self::Image,
+                3 => Self::Audio,
+                _ => Self::UnknownValue(modality::UnknownValue(
+                    wkt::internal::UnknownEnumValue::Integer(value),
+                )),
+            }
+        }
+    }
+
+    #[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
+    impl std::convert::From<&str> for Modality {
+        fn from(value: &str) -> Self {
+            use std::string::ToString;
+            match value {
+                "MODALITY_UNSPECIFIED" => Self::Unspecified,
+                "TEXT" => Self::Text,
+                "IMAGE" => Self::Image,
+                "AUDIO" => Self::Audio,
+                _ => Self::UnknownValue(modality::UnknownValue(
+                    wkt::internal::UnknownEnumValue::String(value.to_string()),
+                )),
+            }
+        }
+    }
+
+    #[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
+    impl serde::ser::Serialize for Modality {
+        fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+        where
+            S: serde::Serializer,
+        {
+            match self {
+                Self::Unspecified => serializer.serialize_i32(0),
+                Self::Text => serializer.serialize_i32(1),
+                Self::Image => serializer.serialize_i32(2),
+                Self::Audio => serializer.serialize_i32(3),
+                Self::UnknownValue(u) => u.0.serialize(serializer),
+            }
+        }
+    }
+
+    #[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
+    impl<'de> serde::de::Deserialize<'de> for Modality {
+        fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+        where
+            D: serde::Deserializer<'de>,
+        {
+            deserializer.deserialize_any(wkt::internal::EnumVisitor::<Modality>::new(
+                ".google.cloud.aiplatform.v1.GenerationConfig.Modality",
+            ))
+        }
+    }
+
+    /// Media resolution for the input media.
+    ///
+    /// # Working with unknown values
+    ///
+    /// This enum is defined as `#[non_exhaustive]` because Google Cloud may add
+    /// additional enum variants at any time. Adding new variants is not considered
+    /// a breaking change. Applications should write their code in anticipation of:
+    ///
+    /// - New values appearing in future releases of the client library, **and**
+    /// - New values received dynamically, without application changes.
+    ///
+    /// Please consult the [Working with enums] section in the user guide for some
+    /// guidelines.
+    ///
+    /// [Working with enums]: https://google-cloud-rust.github.io/working_with_enums.html
+    #[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
+    #[derive(Clone, Debug, PartialEq)]
+    #[non_exhaustive]
+    pub enum MediaResolution {
+        /// Media resolution has not been set.
+        Unspecified,
+        /// Media resolution set to low (64 tokens).
+        Low,
+        /// Media resolution set to medium (256 tokens).
+        Medium,
+        /// Media resolution set to high (zoomed reframing with 256 tokens).
+        High,
+        /// If set, the enum was initialized with an unknown value.
+        ///
+        /// Applications can examine the value using [MediaResolution::value] or
+        /// [MediaResolution::name].
+        UnknownValue(media_resolution::UnknownValue),
+    }
+
+    #[doc(hidden)]
+    #[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
+    pub mod media_resolution {
+        #[allow(unused_imports)]
+        use super::*;
+        #[derive(Clone, Debug, PartialEq)]
+        pub struct UnknownValue(pub(crate) wkt::internal::UnknownEnumValue);
+    }
+
+    #[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
+    impl MediaResolution {
+        /// Gets the enum value.
+        ///
+        /// Returns `None` if the enum contains an unknown value deserialized from
+        /// the string representation of enums.
+        pub fn value(&self) -> std::option::Option<i32> {
+            match self {
+                Self::Unspecified => std::option::Option::Some(0),
+                Self::Low => std::option::Option::Some(1),
+                Self::Medium => std::option::Option::Some(2),
+                Self::High => std::option::Option::Some(3),
+                Self::UnknownValue(u) => u.0.value(),
+            }
+        }
+
+        /// Gets the enum value as a string.
+        ///
+        /// Returns `None` if the enum contains an unknown value deserialized from
+        /// the integer representation of enums.
+        pub fn name(&self) -> std::option::Option<&str> {
+            match self {
+                Self::Unspecified => std::option::Option::Some("MEDIA_RESOLUTION_UNSPECIFIED"),
+                Self::Low => std::option::Option::Some("MEDIA_RESOLUTION_LOW"),
+                Self::Medium => std::option::Option::Some("MEDIA_RESOLUTION_MEDIUM"),
+                Self::High => std::option::Option::Some("MEDIA_RESOLUTION_HIGH"),
+                Self::UnknownValue(u) => u.0.name(),
+            }
+        }
+    }
+
+    #[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
+    impl std::default::Default for MediaResolution {
+        fn default() -> Self {
+            use std::convert::From;
+            Self::from(0)
+        }
+    }
+
+    #[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
+    impl std::fmt::Display for MediaResolution {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::result::Result<(), std::fmt::Error> {
+            wkt::internal::display_enum(f, self.name(), self.value())
+        }
+    }
+
+    #[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
+    impl std::convert::From<i32> for MediaResolution {
+        fn from(value: i32) -> Self {
+            match value {
+                0 => Self::Unspecified,
+                1 => Self::Low,
+                2 => Self::Medium,
+                3 => Self::High,
+                _ => Self::UnknownValue(media_resolution::UnknownValue(
+                    wkt::internal::UnknownEnumValue::Integer(value),
+                )),
+            }
+        }
+    }
+
+    #[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
+    impl std::convert::From<&str> for MediaResolution {
+        fn from(value: &str) -> Self {
+            use std::string::ToString;
+            match value {
+                "MEDIA_RESOLUTION_UNSPECIFIED" => Self::Unspecified,
+                "MEDIA_RESOLUTION_LOW" => Self::Low,
+                "MEDIA_RESOLUTION_MEDIUM" => Self::Medium,
+                "MEDIA_RESOLUTION_HIGH" => Self::High,
+                _ => Self::UnknownValue(media_resolution::UnknownValue(
+                    wkt::internal::UnknownEnumValue::String(value.to_string()),
+                )),
+            }
+        }
+    }
+
+    #[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
+    impl serde::ser::Serialize for MediaResolution {
+        fn serialize<S>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error>
+        where
+            S: serde::Serializer,
+        {
+            match self {
+                Self::Unspecified => serializer.serialize_i32(0),
+                Self::Low => serializer.serialize_i32(1),
+                Self::Medium => serializer.serialize_i32(2),
+                Self::High => serializer.serialize_i32(3),
+                Self::UnknownValue(u) => u.0.serialize(serializer),
+            }
+        }
+    }
+
+    #[cfg(any(feature = "llm-utility-service", feature = "prediction-service",))]
+    impl<'de> serde::de::Deserialize<'de> for MediaResolution {
+        fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+        where
+            D: serde::Deserializer<'de>,
+        {
+            deserializer.deserialize_any(wkt::internal::EnumVisitor::<MediaResolution>::new(
+                ".google.cloud.aiplatform.v1.GenerationConfig.MediaResolution",
+            ))
         }
     }
 }

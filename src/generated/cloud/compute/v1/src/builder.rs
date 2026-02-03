@@ -80754,6 +80754,103 @@ pub mod region_health_check_services {
         }
     }
 
+    /// The request builder for [RegionHealthCheckServices::test_iam_permissions][crate::client::RegionHealthCheckServices::test_iam_permissions] calls.
+    ///
+    /// # Example
+    /// ```
+    /// # use google_cloud_compute_v1::builder::region_health_check_services::TestIamPermissions;
+    /// # async fn sample() -> gax::Result<()> {
+    ///
+    /// let builder = prepare_request_builder();
+    /// let response = builder.send().await?;
+    /// # Ok(()) }
+    ///
+    /// fn prepare_request_builder() -> TestIamPermissions {
+    ///   # panic!();
+    ///   // ... details omitted ...
+    /// }
+    /// ```
+    #[derive(Clone, Debug)]
+    pub struct TestIamPermissions(
+        RequestBuilder<crate::model::region_health_check_services::TestIamPermissionsRequest>,
+    );
+
+    impl TestIamPermissions {
+        pub(crate) fn new(
+            stub: std::sync::Arc<dyn super::super::stub::dynamic::RegionHealthCheckServices>,
+        ) -> Self {
+            Self(RequestBuilder::new(stub))
+        }
+
+        /// Sets the full request, replacing any prior values.
+        pub fn with_request<
+            V: Into<crate::model::region_health_check_services::TestIamPermissionsRequest>,
+        >(
+            mut self,
+            v: V,
+        ) -> Self {
+            self.0.request = v.into();
+            self
+        }
+
+        /// Sets all the options, replacing any prior values.
+        pub fn with_options<V: Into<gax::options::RequestOptions>>(mut self, v: V) -> Self {
+            self.0.options = v.into();
+            self
+        }
+
+        /// Sends the request.
+        pub async fn send(self) -> Result<crate::model::TestPermissionsResponse> {
+            (*self.0.stub)
+                .test_iam_permissions(self.0.request, self.0.options)
+                .await
+                .map(gax::response::Response::into_body)
+        }
+
+        /// Sets the value of [project][crate::model::region_health_check_services::TestIamPermissionsRequest::project].
+        pub fn set_project<T: Into<std::string::String>>(mut self, v: T) -> Self {
+            self.0.request.project = v.into();
+            self
+        }
+
+        /// Sets the value of [region][crate::model::region_health_check_services::TestIamPermissionsRequest::region].
+        pub fn set_region<T: Into<std::string::String>>(mut self, v: T) -> Self {
+            self.0.request.region = v.into();
+            self
+        }
+
+        /// Sets the value of [resource][crate::model::region_health_check_services::TestIamPermissionsRequest::resource].
+        pub fn set_resource<T: Into<std::string::String>>(mut self, v: T) -> Self {
+            self.0.request.resource = v.into();
+            self
+        }
+
+        /// Sets the value of [body][crate::model::region_health_check_services::TestIamPermissionsRequest::body].
+        pub fn set_body<T>(mut self, v: T) -> Self
+        where
+            T: std::convert::Into<crate::model::TestPermissionsRequest>,
+        {
+            self.0.request.body = std::option::Option::Some(v.into());
+            self
+        }
+
+        /// Sets or clears the value of [body][crate::model::region_health_check_services::TestIamPermissionsRequest::body].
+        pub fn set_or_clear_body<T>(mut self, v: std::option::Option<T>) -> Self
+        where
+            T: std::convert::Into<crate::model::TestPermissionsRequest>,
+        {
+            self.0.request.body = v.map(|x| x.into());
+            self
+        }
+    }
+
+    #[doc(hidden)]
+    impl gax::options::internal::RequestBuilder for TestIamPermissions {
+        fn request_options(&mut self) -> &mut gax::options::RequestOptions {
+            &mut self.0.options
+        }
+    }
+
     /// The request builder for [RegionHealthCheckServices::get_operation][crate::client::RegionHealthCheckServices::get_operation] calls.
     ///
     /// # Example
